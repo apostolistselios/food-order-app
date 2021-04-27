@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const mealsRouter = require('./routes/meals');
+const ordersRouter = require('./routes/orders');
 
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -16,5 +17,6 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/meals', mealsRouter);
+app.use('/orders', ordersRouter);
 
 app.listen(3000, () => console.log('server started'));
