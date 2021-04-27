@@ -7,13 +7,17 @@ import classes from './AvailiableMeals.module.css';
 const AvailiableMeals = () => {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [httpError, setHttpError] = useState();
 
   useEffect(() => {
     const fetchMeals = async () => {
       setIsLoading(true);
       const response = await fetch('http://localhost:3000/meals');
-      const responseData = await response.json();
+      if (!response.ok) {
+        throw new Error('Something went wrong fetching data');
+      }
 
+      const responseData = await response.json();
       const loadedMeals = [];
       for (const key in responseData) {
         loadedMeals.push({ ...responseData[key] });
@@ -23,13 +27,24 @@ const AvailiableMeals = () => {
       setIsLoading(false);
     };
 
-    fetchMeals();
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
   }, []);
 
   if (isLoading) {
     return (
-      <section classes={classes['meals-loading']}>
+      <section className={classes['meals-loading']}>
         <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (httpError) {
+    return (
+      <section className={classes['meals-error']}>
+        <p>{httpError}</p>
       </section>
     );
   }
