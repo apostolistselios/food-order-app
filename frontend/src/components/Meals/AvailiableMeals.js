@@ -8,11 +8,12 @@ const AvailiableMeals = () => {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [httpError, setHttpError] = useState();
+  const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
 
   useEffect(() => {
     const fetchMeals = async () => {
       setIsLoading(true);
-      const response = await fetch('http://localhost:3000/meals');
+      const response = await fetch(`${BASE_API_URL}/meals`);
       if (!response.ok) {
         throw new Error('Something went wrong fetching data');
       }
