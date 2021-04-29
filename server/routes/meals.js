@@ -47,17 +47,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PATCH
-router.patch('/:id', getMeal, (req, res) => {});
-
-// DELETE
-router.delete('/:id', getMeal, async (req, res) => {
-  try {
-    await res.meal.remove();
-    res.json({ message: 'Deleted meal' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
 module.exports = router;

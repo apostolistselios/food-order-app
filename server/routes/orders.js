@@ -46,17 +46,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-// // PATCH
-// router.patch('/:id', getOrder, (req, res) => {});
-
-// DELETE
-router.delete('/:id', getOrder, async (req, res) => {
-  try {
-    await res.order.remove();
-    res.json({ message: 'Deleted order' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
 module.exports = router;
