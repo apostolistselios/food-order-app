@@ -27,3 +27,9 @@ $ npm start
 ### Requirements
 
 The project requires you to have **MongoDB Community Edition** installed in order for the API and the server to work.
+
+### Enviroment variables
+
+You have to create 2 .env files one in the server directory and one in the frontend directory.
+In the server's .env you have to define the variable DATABASE_URL which contains your mongodb url.
+In the frontend's .env you have to define the variable REACT_APP_BASE_API_URL which contains the base url of the API for example http://localhost:3000
